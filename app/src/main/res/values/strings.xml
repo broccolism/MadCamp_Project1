@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">MadcampProject1</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="app_name">Kotlin-TabLayout</string>
+
+    <string name="title_address">Address</string>
+    <string name="title_gallery">Gallery</string>
+    <string name="title_account_book">Account Book</string>
+
 </resources>
