@@ -35,10 +35,12 @@ class AddressFragment : Fragment() {
         val uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
         val projection = arrayOf(ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
                 ContactsContract.CommonDataKinds.Phone.NUMBER,
-                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
+                //ContactsContract.CommonDataKinds.Phone.PHOTO_ID
+        )
 
         val selectionArgs = null
-        val sortOrder = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + "COLLATE LOCALIZED ASC"
+        val sortOrder = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " COLLATE LOCALIZED ASC"
 
         val contactCursor = context?.contentResolver!!.query(uri, projection, null, selectionArgs, sortOrder)
 
@@ -60,6 +62,7 @@ class AddressFragment : Fragment() {
 
                 val id = contactCursor.getLong(0)
                 val name = contactCursor.getString(2)
+                //val image = contactCursor.getShort(3)
 
                 val address = Address(id, number, name)
                 addressList.add(address)
