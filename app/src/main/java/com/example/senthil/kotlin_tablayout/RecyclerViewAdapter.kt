@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import kotlinx.android.synthetic.main.item_main.view.*
+import kotlinx.android.synthetic.main.item_address.view.*
 
 class RecyclerViewAdapter (val addressList: MutableList<Address>) :
                                 RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_main, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_address, parent, false)
         return ViewHolder(view)
     }
 

@@ -1,20 +1,76 @@
 package com.example.senthil.kotlin_tablayout
 
-import android.support.v7.app.AppCompatActivity
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.content.ContextCompat
 import android.support.v4.view.ViewPager
+import android.support.v7.app.AlertDialog
+import android.support.v7.app.AppCompatActivity
 import com.example.senthil.kotlin_tablayout.Fragment.GalleryFragment
 import com.example.senthil.kotlin_tablayout.Fragment.AccountBookFragment
 import com.example.senthil.kotlin_tablayout.Fragment.AddressFragment
 import kotlinx.android.synthetic.main.activity_tab_layout.*
 
-class TabLayoutActivity : AppCompatActivity() {
+class TabLayoutActivity : AppCompatActivity()
+{
+    private val multiplePermissionsCode = 100
+
+    //List of Permissions
+    private val requiredPermissions = arrayOf(
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.READ_EXTERNAL_STORAGE )
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        var rejectedPermissionList = ArrayList<String>()
+
+        //필요한 퍼미션들을 하나씩 끄집어내서 현재 권한을 받았는지 체크
+        while (ContextCompat.checkSelfPermission(this, requiredPermissions[0])!= PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, requiredPermissions[1])!= PackageManager.PERMISSION_GRANTED) {
+            for (permission in requiredPermissions) {
+                if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                    //만약 권한이 없다면 rejectedPermissionList에 추가
+                    rejectedPermissionList.add(permission)
+                }
+            }
+            //거절된 퍼미션이 있다면...
+            if (rejectedPermissionList.isNotEmpty()) {
+                //권한 요청!
+                val array = arrayOfNulls<String>(rejectedPermissionList.size)
+                ActivityCompat.requestPermissions(this, rejectedPermissionList.toArray(array), multiplePermissionsCode)
+            }
+        }
+
+/*        while (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
+        {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE))
+            {
+                AlertDialog.Builder(this).apply {
+                    setTitle("권한이 필요한 이유")
+                    setMessage("사진 정보를 얻기 위해서는 외부 저장소 권한이 필수로 필요합니다")
+                    setPositiveButton("Yes") { dialog, which ->
+                        // 권한 요청
+                        ActivityCompat.requestPermissions(this@TabLayoutActivity,
+                                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                                1000)
+                    }
+                    setNegativeButton("Cancel", null)
+                }.show()
+            }
+            else
+            {
+                val requesting = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+                ActivityCompat.requestPermissions(this,requesting, 1)
+            }
+        }*/
+
         setContentView(R.layout.activity_tab_layout)
 
         setupViewPager(viewpager)
