@@ -11,24 +11,20 @@ import kotlinx.android.synthetic.main.fragment_gallery.*
 
 class GalleryFragment : Fragment()
 {
-    override fun onCreate(savedInstanceState: Bundle?)
-        {
-            super.onCreate(savedInstanceState)
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
-        override fun onActivityCreated(savedInstanceState: Bundle?)
-        {
-            super.onActivityCreated(savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
-            listing?.adapter = GridViewAdapter(requireContext())
-        }
+        listing?.adapter = GridViewAdapter(requireContext())
+    }
 
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                                  savedInstanceState: Bundle?): View?
-        {
-            val root = inflater.inflate(R.layout.fragment_gallery, container, false)
-            return root
-        }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val root = inflater.inflate(R.layout.fragment_gallery, container, false)
+        return root
+    }
 }
 
 

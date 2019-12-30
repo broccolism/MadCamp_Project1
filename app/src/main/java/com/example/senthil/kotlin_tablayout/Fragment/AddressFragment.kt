@@ -86,15 +86,4 @@ class AddressFragment : Fragment() {
 
         return view
     }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        /*
-        mRecyclerView?.apply {
-            this.layoutManager = LinearLayoutManager(context)
-            this.adapter = adapter
-        }
-         */
-    }
 }

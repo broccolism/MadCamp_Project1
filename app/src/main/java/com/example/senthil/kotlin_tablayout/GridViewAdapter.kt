@@ -45,6 +45,7 @@ class GridViewAdapter : BaseAdapter
             startActivity(mContext, intenting, null)
         })
         /*END*/
+
 /*
         var image: ItemData = ItemData(imageIDs[position])
 
