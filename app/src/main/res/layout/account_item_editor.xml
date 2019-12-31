@@ -80,7 +80,7 @@
 
 
     <EditText
-        android:id="@+id/editor_info"
+        android:id="@+id/editor_usage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="12"
@@ -91,12 +91,12 @@
         app:layout_constraintTop_toBottomOf="@+id/editor_money" />
 
     <Button
-        android:id="@+id/editor_info_button"
+        android:id="@+id/editor_usage_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/editor_info"
+        app:layout_constraintStart_toEndOf="@+id/editor_usage"
         app:layout_constraintTop_toBottomOf="@+id/editor_money_button" />
 
     <TextView
@@ -111,7 +111,7 @@
         app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editor_info" />
+        app:layout_constraintTop_toBottomOf="@+id/editor_usage" />
 
 
     <LinearLayout

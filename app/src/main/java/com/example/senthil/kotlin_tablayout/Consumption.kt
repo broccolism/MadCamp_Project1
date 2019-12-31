@@ -13,6 +13,7 @@ class Consumption constructor(var id: Int?, var money: Int?, var pm: Int?, var u
             parcel?.readString()
     )
 
+
     override fun writeToParcel(parcel: Parcel?, flags: Int) {
         parcel?.writeInt(id!!)
         parcel?.writeInt(money!!)

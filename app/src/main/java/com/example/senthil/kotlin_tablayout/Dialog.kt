@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import kotlinx.android.synthetic.main.dialog_item.*
@@ -25,6 +26,9 @@ class Dialog : AppCompatActivity() {
             Consumption(3, 2000, -1, "yogurt", "2019/12/31 19:30")
     )
 
+    private var EDIT_REQUEST = 1
+    private var ADD_REQUEST = 2
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_list)
@@ -37,7 +41,7 @@ class Dialog : AppCompatActivity() {
                     val intent: Intent = Intent(this, ModifyActivity::class.java)
                     intent.putExtra("consumption", consumption)
 
-                    startActivity(intent)
+                    startActivityForResult(intent, EDIT_REQUEST)
                 }))
 
         refreshData()
@@ -56,7 +60,33 @@ class Dialog : AppCompatActivity() {
             next.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             next.putExtra("month", month)
             next.putExtra("day", day)
-            startActivity(next)
+            next.putExtra("max_id", db.dbList.size)
+            startActivityForResult(next, ADD_REQUEST)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == ADD_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                // db.addConsumption~~
+                val addedConsumption = data?.getParcelableExtra<Consumption>("addConsumption")
+                Log.e("ADD!!", addedConsumption?.usage.toString())
+            }
+        }
+
+        else if (requestCode == EDIT_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                // db.updateConsumption~~
+                val updatedConsumption = data?.getParcelableExtra<Consumption>("updateConsumption")
+                Log.e("UPDATE!!", updatedConsumption?.usage.toString())
+            }
+            else if (resultCode == Activity.RESULT_FIRST_USER){
+                // db.deleteConsumption~~
+                val deletedConsumption = data?.getParcelableExtra<Consumption>("deleteConsumption")
+                Log.e("DELETE!!", deletedConsumption?.usage.toString())
+            }
         }
     }
 
