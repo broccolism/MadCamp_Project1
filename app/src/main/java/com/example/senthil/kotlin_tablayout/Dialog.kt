@@ -20,9 +20,9 @@ class Dialog : AppCompatActivity() {
     private var listConsumptions: List<Consumption> = ArrayList<Consumption>()
 
     private val items: ArrayList<Consumption> = arrayListOf(
-            Consumption(1, "+10000", "jack", "2019/12/31 17:00"),
-            Consumption(2, "-6000", "dinner", "2019/12/31 19:00"),
-            Consumption(3, "-2000", "yogurt", "2019/12/31 19:30")
+            Consumption(1, 10000, 1, "jack", "2019/12/31 17:00"),
+            Consumption(2, 6000, -1, "dinner", "2019/12/31 19:00"),
+            Consumption(3, 2000, -1, "yogurt", "2019/12/31 19:30")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

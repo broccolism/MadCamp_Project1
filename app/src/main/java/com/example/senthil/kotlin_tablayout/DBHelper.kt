@@ -14,13 +14,14 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         private val TABLE_NAME = "ACCOUNT"
         private val ID = "Id"
         private val MONEY = "Money"
+        private val PM = "Pm"
         private val USAGE = "Usage"
         private val TIME = "Time"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
         val CREATE_TABLE_QUERY = ("CREATE TABLE $TABLE_NAME" +
-                "($ID INTEGER PRIMARY KEY, $MONEY TEXT, $USAGE TEXT, $TIME TEXT)")
+                "($ID INTEGER PRIMARY KEY, $MONEY INTEGER, $PM INTEGER, $USAGE TEXT, $TIME TEXT)")
         db!!.execSQL(CREATE_TABLE_QUERY)
     }
 
@@ -38,9 +39,10 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
             if (cursor.moveToFirst()) {
                 do {
-                    var consumption = Consumption(0, null, null, null)
+                    var consumption = Consumption(0, 0, 0, null, null)
                     consumption.id = cursor.getInt(cursor.getColumnIndex(ID))
-                    consumption.money = cursor.getString(cursor.getColumnIndex(MONEY))
+                    consumption.money = cursor.getInt(cursor.getColumnIndex(MONEY))
+                    consumption.pm = cursor.getInt(cursor.getColumnIndex(PM))
                     consumption.usage = cursor.getString(cursor.getColumnIndex(USAGE))
                     consumption.time = cursor.getString(cursor.getColumnIndex(TIME))
 
@@ -57,6 +59,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
         values.put(ID, consumption.id)
         values.put(MONEY, consumption.money)
+        values.put(PM, consumption.pm)
         values.put(USAGE, consumption.usage)
         values.put(TIME, consumption.time)
 
@@ -70,6 +73,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
         values.put(ID, consumption.id)
         values.put(MONEY, consumption.money)
+        values.put(PM, consumption.pm)
         values.put(USAGE, consumption.usage)
         values.put(TIME, consumption.time)
 

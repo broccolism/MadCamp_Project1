@@ -35,7 +35,7 @@ class DialogAdapter(val items : ArrayList<Consumption>, val click: (Consumption)
 
         fun bind (consumption: Consumption) {
             _usage?.text = consumption.usage
-            _money?.text = consumption.money
+            _money?.text = consumption.money.toString()
         }
     }
 }

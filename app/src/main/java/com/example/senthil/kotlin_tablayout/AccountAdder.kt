@@ -20,6 +20,9 @@ class AccountAdder : AppCompatActivity()
         adder_date_month.setText(month.toString())
         adder_date_day.setText(day.toString())
 
+
+
+
     }
 
     //액티비티 종료 될 때 애니메이션 없애는 부분.
