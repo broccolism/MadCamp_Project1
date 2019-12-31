@@ -21,7 +21,8 @@
         </activity>
 
         <activity android:name = ".GalleryFullImage"/>
-
+        <activity android:name=".Dialog"/>
+        <activity android:name=".TestingActivity"/>
     </application>
 
 </manifest>

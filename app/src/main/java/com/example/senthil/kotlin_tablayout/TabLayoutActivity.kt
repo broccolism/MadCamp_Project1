@@ -48,29 +48,6 @@ class TabLayoutActivity : AppCompatActivity()
             }
         }
 
-/*        while (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
-        {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE))
-            {
-                AlertDialog.Builder(this).apply {
-                    setTitle("권한이 필요한 이유")
-                    setMessage("사진 정보를 얻기 위해서는 외부 저장소 권한이 필수로 필요합니다")
-                    setPositiveButton("Yes") { dialog, which ->
-                        // 권한 요청
-                        ActivityCompat.requestPermissions(this@TabLayoutActivity,
-                                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                                1000)
-                    }
-                    setNegativeButton("Cancel", null)
-                }.show()
-            }
-            else
-            {
-                val requesting = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
-                ActivityCompat.requestPermissions(this,requesting, 1)
-            }
-        }*/
-
         setContentView(R.layout.activity_tab_layout)
 
         setupViewPager(viewpager)

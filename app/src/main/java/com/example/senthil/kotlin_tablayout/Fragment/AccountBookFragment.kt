@@ -1,34 +1,39 @@
 package com.example.senthil.kotlin_tablayout.Fragment
 
+import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.GridLayoutManager
-import android.util.Log
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import com.example.senthil.kotlin_tablayout.BaseCalendar
-import com.example.senthil.kotlin_tablayout.CalendarAdapter
+import com.example.senthil.kotlin_tablayout.*
+import kotlinx.android.synthetic.main.dialog_list.*
 
-import com.example.senthil.kotlin_tablayout.R
 import kotlinx.android.synthetic.main.fragment_account_book.*
-import kotlinx.android.synthetic.main.fragment_account_book.view.*
 import java.util.*
 
 class AccountBookFragment : Fragment() {
     lateinit var calendarAdapter: CalendarAdapter
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        calendarAdapter = CalendarAdapter(this) {
-            month, day -> Log.e("POSITION", "${month} / ${day}")
-        }
+        calendarAdapter = CalendarAdapter(this, (
+            fun (month: Int, day: Int)
+            {
+                val intent: Intent = Intent(this.context, Dialog::class.java)
+                intent.putExtra("month", month)
+                intent.putExtra("day", day)
+                startActivity(intent)
+            }))
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -52,6 +57,15 @@ class AccountBookFragment : Fragment() {
         rv_calendar?.addItemDecoration(DividerItemDecoration(this.context, DividerItemDecoration.VERTICAL))
 
         //rv_calendar.setHasFixedSize(true)
+
+
+
+
+
+
+
+
+
     }
 
     fun refreshCurrentMonth(calendar: Calendar) {
