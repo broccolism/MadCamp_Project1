@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import kotlinx.android.synthetic.main.dialog_item.view.*
 
-class DialogAdapter(val items : ArrayList<AccountValue>) : RecyclerView.Adapter<DialogAdapter.DialogHolder>() {
+class DialogAdapter(val items : ArrayList<Consumption>, val click: (Consumption) -> Unit) : RecyclerView.Adapter<DialogAdapter.DialogHolder>() {
 
     // Gets the number of animals in the list
     override fun getItemCount(): Int {
@@ -24,16 +24,18 @@ class DialogAdapter(val items : ArrayList<AccountValue>) : RecyclerView.Adapter<
     // Binds each animal in the ArrayList to a view
     override fun onBindViewHolder(holder: DialogHolder, position: Int) {
         holder.bind(items[position])
+
+        holder.itemView.setOnClickListener { click(items[position]) }
     }
 
     inner class DialogHolder (view: View) : RecyclerView.ViewHolder(view) {
         // Holds the TextView that will add each animal to
-        val _info = view.findViewById<TextView>(R.id.item_dialog_info)
-        val _value = view.findViewById<TextView>(R.id.item_dialog_value)
+        val _usage = view.findViewById<TextView>(R.id.item_dialog_usage)
+        val _money = view.findViewById<TextView>(R.id.item_dialog_money)
 
-        fun bind (accountValue: AccountValue) {
-            _info?.text = accountValue.info
-            _value?.text = accountValue.value
+        fun bind (consumption: Consumption) {
+            _usage?.text = consumption.usage
+            _money?.text = consumption.money
         }
     }
 }
