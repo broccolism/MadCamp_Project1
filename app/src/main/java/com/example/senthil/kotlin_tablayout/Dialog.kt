@@ -34,6 +34,7 @@ class Dialog : AppCompatActivity() {
         setContentView(R.layout.dialog_list)
 
         val intent = getIntent()
+        val year = intent.getIntExtra("year", 0)
         val month = intent.getIntExtra("month", 0)
         val day = intent.getIntExtra("day", 0)
 
@@ -86,6 +87,7 @@ class Dialog : AppCompatActivity() {
             next.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             next.putExtra("month", month)
             next.putExtra("day", day)
+            next.putExtra("year", year)
             next.putExtra("max_id", db.dbList.size)
             startActivityForResult(next, ADD_REQUEST)
         }

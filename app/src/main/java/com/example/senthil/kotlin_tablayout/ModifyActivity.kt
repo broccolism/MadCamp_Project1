@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.account_item_adder.*
@@ -28,7 +30,6 @@ class ModifyActivity : AppCompatActivity() {
         //200101
         val money = this.editor_money
         val usage = this.editor_usage
-        val time = this.editor_time_textView
 
         money.setText(intent.getStringExtra("money"))
         usage.setText(intent.getStringExtra("usage"))
@@ -43,16 +44,20 @@ class ModifyActivity : AppCompatActivity() {
 
         this.editor_radioGroup.check(original_radio)
 
-        //val checked_id = original_pm.checkedRadioButtonId
+
+        //val tmp_time = intent.getStringExtra("time") //"YYYY/MM/DD_HH:MM"
+        val consumption = intent.getParcelableExtra<Consumption>("consumption")
+
+        var hour = consumption.time!!.slice(IntRange(11, 12))
+        var minute = consumption.time!!.slice(IntRange(14, 15))
+
+        editor_spinner_hour.setSelection(Integer.parseInt(hour))
+        editor_spinner_minute.setSelection(Integer.parseInt(minute))
 
 
-        val tmp_time = intent.getStringExtra("time") //"YYYY/MM/DD_HH:MM"
-        val hour = tmp_time!!.slice(IntRange(11, 12))
-        val minute = tmp_time!!.slice(IntRange(14, 15))
-        time.text = "at " + hour + " : " + minute
         //END
 
-        val consumption = intent.getParcelableExtra<Consumption>("consumption")
+
 
         var inOrOut = false
 
@@ -89,6 +94,22 @@ class ModifyActivity : AppCompatActivity() {
             }
         }
 
+        editor_spinner_hour.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                hour = editor_spinner_hour.getItemAtPosition(position)!!.toString()
+            }
+        }
+
+        editor_spinner_minute.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                minute = editor_spinner_minute.getItemAtPosition(position)!!.toString()
+            }
+        }
+
         edit_save_account_item.setOnClickListener {
             val intent = Intent()
 
@@ -98,7 +119,13 @@ class ModifyActivity : AppCompatActivity() {
             val money = if(updated_money_flag) Integer.parseInt(editor_money?.text.toString()) else Integer.parseInt(original_money.toString())
             val pm = if(inOrOut) 1 else -1
             val usage = if(updated_usage_flag) editor_usage?.text.toString() else original_usage
-            val time = consumption.time
+
+            //val time = consumption.time
+
+            val year = consumption.time.toString().slice(IntRange(0, 3))
+            val month = consumption.time.toString().slice(IntRange(5, 6))
+            val day = consumption.time.toString().slice(IntRange(8, 9))
+            val time = "$year/$month/$day $hour:$minute:00"
 
             val consumption = Consumption(id, money, pm, usage, time)
             intent.putExtra("updateConsumption", consumption)

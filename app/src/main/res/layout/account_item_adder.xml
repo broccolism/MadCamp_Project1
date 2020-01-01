@@ -122,6 +122,41 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adder_money" />
 
+    <LinearLayout
+        android:id="@+id/LinearSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:orientation="horizontal"
+        android:layout_marginTop="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adder_usage">
+
+        <Spinner
+            android:id="@+id/adder_spinner_hour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/hour"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="@id/adder_usage"
+            app:layout_constraintTop_toBottomOf="@id/adder_usage" />
+
+        <Spinner
+            android:id="@+id/adder_spinner_minute"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/minute"
+            android:layout_marginLeft="10sp"
+
+            app:layout_constraintRight_toLeftOf="@id/adder_spinner_hour"
+            app:layout_constraintStart_toStartOf="@id/adder_usage"
+            app:layout_constraintTop_toBottomOf="@id/adder_usage" />
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/add_new_account_item"
         android:layout_width="wrap_content"
@@ -133,6 +168,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/adder_usage" />
+        app:layout_constraintTop_toBottomOf="@id/LinearSpinner" />
 
 </android.support.constraint.ConstraintLayout>

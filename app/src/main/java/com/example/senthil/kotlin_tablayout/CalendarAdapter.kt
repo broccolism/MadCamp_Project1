@@ -9,7 +9,7 @@ import com.example.senthil.kotlin_tablayout.Fragment.AccountBookFragment
 import kotlinx.android.synthetic.main.item_calendar.view.*
 
 
-class CalendarAdapter(private val mainActivity: AccountBookFragment, val itemClick: (Int, Int) -> Unit) : RecyclerView.Adapter<ViewHolderHelper>() {
+class CalendarAdapter(private val mainActivity: AccountBookFragment, val itemClick: (Int, Int, Int) -> Unit) : RecyclerView.Adapter<ViewHolderHelper>() {
 
     private val baseCalendar = BaseCalendar()
 
@@ -29,6 +29,7 @@ class CalendarAdapter(private val mainActivity: AccountBookFragment, val itemCli
     }
 
     override fun onBindViewHolder(holder: ViewHolderHelper, position: Int) {
+        val year = baseCalendar.calendar.get(Calendar.YEAR)
         var month = baseCalendar.calendar.get(Calendar.MONTH) + 1
         var day = baseCalendar.data[position]
 
@@ -51,7 +52,7 @@ class CalendarAdapter(private val mainActivity: AccountBookFragment, val itemCli
 
         holder.containerView.tv_date.text = baseCalendar.data[position].toString()
 
-        holder.containerView.setOnClickListener { itemClick(month, day) }
+        holder.containerView.setOnClickListener { itemClick(year, month, day) }
 
 
         /**

@@ -24,9 +24,10 @@ class AccountBookFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         calendarAdapter = CalendarAdapter(this, (
-            fun (month: Int, day: Int)
+            fun (year: Int, month: Int, day: Int)
             {
                 val intent: Intent = Intent(this.context, Dialog::class.java)
+                intent.putExtra("year", year)
                 intent.putExtra("month", month)
                 intent.putExtra("day", day)
                 startActivity(intent)

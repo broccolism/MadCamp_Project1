@@ -8,4 +8,4 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_calendar.view.*
 
 
-open class ViewHolderHelper(override val containerView: View, itemClick: (Int, Int) -> Unit) : RecyclerView.ViewHolder(containerView), LayoutContainer
+open class ViewHolderHelper(override val containerView: View, itemClick: (Int, Int, Int) -> Unit) : RecyclerView.ViewHolder(containerView), LayoutContainer

@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.account_item_adder.*
 import kotlinx.android.synthetic.main.account_item_editor.*
@@ -25,12 +27,18 @@ class AccountAdder : AppCompatActivity() {
         setContentView(R.layout.account_item_adder)
 
         val intent = getIntent()
+        val year = intent.getIntExtra("year", 0)
         val month = intent.getIntExtra("month", 0)
         val day = intent.getIntExtra("day", 0)
         val max_id = intent.getIntExtra("max_id", 0)
+        var hour : String? = null
+        var minute : String? = null
 
         adder_date_month.setText(month.toString())
         adder_date_day.setText(day.toString())
+
+        var month_string = if (month < 10) "0" + month.toString() else month.toString()
+        var day_string = if (day < 10) "0" + day.toString() else day.toString()
 
 
         var inOrOut = false
@@ -68,6 +76,22 @@ class AccountAdder : AppCompatActivity() {
             }
         }
 
+        adder_spinner_hour.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                hour = adder_spinner_hour.getItemAtPosition(position)!!.toString()
+            }
+        }
+
+        adder_spinner_minute.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                minute = adder_spinner_minute.getItemAtPosition(position)!!.toString()
+            }
+        }
+
         // add
         add_new_account_item.setOnClickListener {
             val intent = Intent()
@@ -77,10 +101,13 @@ class AccountAdder : AppCompatActivity() {
             val pm = if(inOrOut) 1 else -1
             val usage = adder_usage?.text.toString()
 
-            val zone = TimeZone.getTimeZone("Asia/Seoul")
-            val cal = GregorianCalendar(zone)
-            val form = SimpleDateFormat("yyyy/MM/dd hh:mm:ss")
-            val time = form.format(cal.getTime())
+            //val zone = TimeZone.getTimeZone("Asia/Seoul")
+            //val cal = GregorianCalendar(zone)
+            //val form = SimpleDateFormat("yyyy/MM/dd hh:mm:ss")
+            //val time = form.format(cal.getTime())
+            val time =  "$year/$month_string/$day_string $hour:$minute:00"
+
+            //Log.e("asdfsadfsadfad", "$time, $_time")
 
             val consumption = Consumption(id, money, pm, usage, time)
             intent.putExtra("addConsumption", consumption)
