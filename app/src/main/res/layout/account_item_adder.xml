@@ -102,21 +102,11 @@
         android:id="@+id/adder_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="12"
+        android:ems="17"
         android:hint="How much?"
         android:inputType="number"
-        android:layout_marginLeft="10sp"
-        app:layout_constraintTop_toBottomOf="@+id/adder_radioGroup"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/adder_money_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/adder_money"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/adder_radioGroup" />
 
 
@@ -125,23 +115,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:ems="12"
+        android:ems="17"
         android:hint="More info..."
         android:inputType="text"
-        android:layout_marginLeft="10sp"
-        app:layout_constraintTop_toBottomOf="@+id/adder_money_button"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/adder_usage_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:text="Button"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintTop_toBottomOf="@id/adder_money_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/adder_usage" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adder_money" />
 
     <Button
         android:id="@+id/add_new_account_item"
@@ -150,7 +129,7 @@
         android:layout_marginTop="10dp"
         android:text="Save"
 
-        app:layout_constraintVertical_bias="0.2"
+        app:layout_constraintVertical_bias="0.07"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

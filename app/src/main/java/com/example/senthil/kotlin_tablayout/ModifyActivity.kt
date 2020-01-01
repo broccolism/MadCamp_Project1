@@ -37,6 +37,12 @@ class ModifyActivity : AppCompatActivity() {
         val original_money = original_consumption.money
         val original_usage = original_consumption.usage
 
+        val original_radio = if(original_consumption.pm == 1) editor_income.id else editor_outcome.id
+
+        //Log.e("original_radio", "${this.editor_radioGroup.checkedRadioButtonId}")
+
+        this.editor_radioGroup.check(original_radio)
+
         //val checked_id = original_pm.checkedRadioButtonId
 
 
@@ -74,11 +80,11 @@ class ModifyActivity : AppCompatActivity() {
             when(i) {
                 R.id.editor_income -> {
                     inOrOut = true
-                    Log.e("INCOME", "$inOrOut")
+                    Log.e("INCOME", "$inOrOut, ${editor_radioGroup.checkedRadioButtonId}")
                 }
                 R.id.editor_outcome -> {
                     inOrOut = false
-                    Log.e("INCOME", "$inOrOut")
+                    Log.e("INCOME", "$inOrOut, ${editor_radioGroup.checkedRadioButtonId}")
                 }
             }
         }
