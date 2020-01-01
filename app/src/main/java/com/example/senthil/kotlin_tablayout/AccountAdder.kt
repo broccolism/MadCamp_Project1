@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.Toast
 import kotlinx.android.synthetic.main.account_item_adder.*
 import kotlinx.android.synthetic.main.account_item_editor.*
 import kotlinx.android.synthetic.main.dialog_list.*
@@ -85,7 +86,7 @@ class AccountAdder : AppCompatActivity() {
             intent.putExtra("addConsumption", consumption)
             setResult(Activity.RESULT_OK, intent)
 
-
+            Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show()
         }
     }
 

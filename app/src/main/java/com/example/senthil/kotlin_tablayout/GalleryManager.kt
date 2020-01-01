@@ -27,10 +27,10 @@ class GalleryManager { //사진정보를 가져옴
             MediaStore.MediaColumns.DATA,
             MediaStore.Images.Media.DATE_ADDED)
 
-        var cursor: Cursor = mContext . getContentResolver ().query(uri, projection, null, null, null);
+        var cursor: Cursor = mContext.getContentResolver().query(uri, projection, null, null, null);
         // 그 안에서의 이동 및 쿼리, 다 가져옴
 
-        var columnIndexData = cursor . getColumnIndexOrThrow (MediaStore.MediaColumns.DATA)
+        var columnIndexData = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
 
         while (cursor.moveToNext())
         {

@@ -60,12 +60,9 @@ class CalendarAdapter(private val mainActivity: AccountBookFragment, val itemCli
         val db = DBHelper(mainActivity.requireContext())
         val consumptionList = db.dbList
 
-        var list_income : ArrayList<Consumption> = arrayListOf()
-        var list_outcome : ArrayList<Consumption> = arrayListOf()
-
         var sum_income : Int = 0
         var sum_outcome : Int = 0
-        var sum_total : Int = 0
+        var sum_total : Int
 
         for (it in consumptionList)
         {

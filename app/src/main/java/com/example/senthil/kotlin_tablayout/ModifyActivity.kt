@@ -8,6 +8,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.account_item_adder.*
 import kotlinx.android.synthetic.main.account_item_editor.*
 import kotlinx.android.synthetic.main.activity_modify.*
@@ -29,8 +30,15 @@ class ModifyActivity : AppCompatActivity() {
         val usage = this.editor_usage
         val time = this.editor_time_textView
 
-        money.setHint(intent.getStringExtra("money"))
-        usage.setHint(intent.getStringExtra("usage"))
+        money.setText(intent.getStringExtra("money"))
+        usage.setText(intent.getStringExtra("usage"))
+
+        val original_consumption = intent.getParcelableExtra<Consumption>("consumption")
+        val original_money = original_consumption.money
+        val original_usage = original_consumption.usage
+
+        //val checked_id = original_pm.checkedRadioButtonId
+
 
         val tmp_time = intent.getStringExtra("time") //"YYYY/MM/DD_HH:MM"
         val hour = tmp_time!!.slice(IntRange(11, 12))
@@ -78,15 +86,19 @@ class ModifyActivity : AppCompatActivity() {
         edit_save_account_item.setOnClickListener {
             val intent = Intent()
 
+            Log.e("MONEEEEEY", "${editor_money?.text.toString()} and $original_money")
+            Log.e("USAAAAAGE", "${editor_usage?.text.toString()} and $original_usage")
             val id = consumption.id
-            val money = Integer.parseInt(editor_money?.text.toString())
+            val money = if(updated_money_flag) Integer.parseInt(editor_money?.text.toString()) else Integer.parseInt(original_money.toString())
             val pm = if(inOrOut) 1 else -1
-            val usage = editor_usage?.text.toString()
+            val usage = if(updated_usage_flag) editor_usage?.text.toString() else original_usage
             val time = consumption.time
 
             val consumption = Consumption(id, money, pm, usage, time)
             intent.putExtra("updateConsumption", consumption)
             setResult(Activity.RESULT_OK, intent)
+
+            Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show()
         }
 
         edit_delete_account_item.setOnClickListener {

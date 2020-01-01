@@ -42,6 +42,10 @@ class AccountBookFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val baseCalendar = BaseCalendar()
+        baseCalendar.initBaseCalendar { refreshCurrentMonth(it) }
+
         tv_prev_month?.setOnClickListener { calendarAdapter.changeToPrevMonth() }
         tv_next_month?.setOnClickListener { calendarAdapter.changeToNextMonth() }
     }
