@@ -14,7 +14,7 @@ class GalleryFullImage : AppCompatActivity()
         this.overridePendingTransition(R.layout.fade_in, R.layout.fade_out)
         setContentView(R.layout.full_image)
         val intent: Intent = getIntent()
-        val adapting = GridViewAdapter(this)
+        //val adapting = GridViewAdapter(this)
         val imageView : ImageView = findViewById(R.id.full_image)
 
         val path = intent.getStringExtra("path")
